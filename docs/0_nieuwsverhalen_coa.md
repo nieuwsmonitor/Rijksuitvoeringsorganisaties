@@ -95,13 +95,28 @@ de media veel ruimte voor de politiek als bron van het nieuws en het
 ministerie. Ook komen burgemeesters en wethouders aan het woord, vooral
 wanneer het gaat om de mogelijke opvang in een specifieke gemeente.
 
-# 6a. Bronnen in het nieuws over tijd
+# 6a. Bronnen in het nieuws per type media
+
+In onderstaande figuur geven we weer in hoeverre de verschillende
+bronnen naar voren kwamen in het nieuws van de dagbladen, de online
+nieuwssites en in de Kamervragen.
+
+![](0_nieuwsverhalen_coa_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+
+We zien dat de Rijksuitvoeringsorganisatie veel vaker in het nieuws als
+bron naar voren kwam op de nieuwssites dan in de dagbladen en in de
+Kamervragen. Politici aan de andere kant kwamen nauwelijks voor als bron
+van het nieuws in de online nieuwsberichten. De dagbladen hadden meer
+oog voor de politici als bron van het nieuws. Dit gold ook voor de
+verschilldende burgemeesters en wethouders.
+
+# 6b. Bronnen in het nieuws over tijd
 
 In onderstaande figuur geven we weer in hoeverre de verschillende
 bronnen voorkomen in het nieuwsverhaal rond het COA in aanloop naar de
 week met het meeste nieuws en in de weken erna.
 
-![](0_nieuwsverhalen_coa_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](0_nieuwsverhalen_coa_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 We zien dat in het begin van dit nieuwsverhaal het voor het COA zelf is
 dat in het nieuws verschijnt als bron. Daarna komen er ook meer politici
@@ -117,7 +132,7 @@ aan het woord gelaten.
 Het verhaal rond het COA is vooral ondergravend; een meerderheid van de
 frames valt in die categorie, zoals ook blijkt uit onderstaande figuur.
 
-![](0_nieuwsverhalen_coa_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](0_nieuwsverhalen_coa_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
 De helft van de frames (50%) bestaat uit het frame ‘Geen grip’. Het COA
 kon de stroom vluchtelingen niet aan was de strekking van het
@@ -135,7 +150,23 @@ veelal genoemd. In dit verhaal komt dit frame ook met regelmaat terug.
 Juist de bezuiningen van de afgelopen jaren hebben de situatie
 veroorzaakt.
 
-# 7a. Frames over tijd
+# 7a. Frames in de verschillende type media
+
+In onderstaande figuur geven we het gebruik van de frames weer in de
+verschillende soorten media.
+
+![](0_nieuwsverhalen_coa_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+
+We zien dat in alle media het frame Geen Grip het vaakst voorkomt.
+Daarnaast is er veel aandacht voor het frame van gedeelde
+verantwoordelijkheid. Alleen in Kamervragen is dit frame niet terug te
+vinden. Daar zien we wel aandacht voor het “Kapot bezuinigd” frame en
+het Soft frame, oftewel de RUO opereert te soft en zou harder moeten
+optreden. In de overige media is dit frame niet of nauwelijks terug te
+vinden. Het frame waarbij het gaat om de ‘grenzen en de moetjes’ van de
+wet komen in alle media terug. Het vaakst op televisie.
+
+# 7b. Frames over tijd
 
 In onderstaande figuur geven we weer in hoeverre er constructieve en
 ondergravende frames voorkwamen in het nieuws en in hoeverre het nieuws
@@ -145,7 +176,7 @@ die berichten waarin geen frame te vinden was. Dit zijn berichten waarin
 vooral feiten worden weergegeven die verder niet in een bepaalde context
 worden geplaatst.
 
-![](0_nieuwsverhalen_coa_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+![](0_nieuwsverhalen_coa_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
 We zien dat in het begin van het nieuwsverhaal, de eerste dagen, nog
 nieuws te vinden was waarin geen frames werden gebruikt. In het begin
