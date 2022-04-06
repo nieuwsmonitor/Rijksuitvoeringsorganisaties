@@ -1,0 +1,486 @@
+---
+title: "Nieuwsverhalen vergelijking"
+author: "Analyses inhoud van het nieuws"
+date: "April 2022"
+output: github_document
+header-includes: \usepackage{svdj}
+editor_options:
+  chunk_output_type: console
+subparagraph: yes
+---
+
+```{r, echo=F, warning=F, message=FALSE}
+library(writexl)
+knitr::opts_chunk$set(warning=FALSE, message=FALSE, echo = FALSE)
+library(printr)
+library(amcatr)
+library(tidyverse)
+library(scales)
+library(lubridate)
+library(quanteda)
+library(corpustools)
+library(extrafont)
+library(quanteda.textplots)
+library(quanteda.textstats)
+library(Cairo)
+library(memoise)
+library(ggplot2)
+library(dplyr)
+library(patchwork) # To display 2 charts together
+library(hrbrthemes)
+#font_import("/home/nel/Downloads/", pattern=".ttf")
+#extrafont::fonts()
+#extrafont::fonttable() %>% View
+```
+
+```{r, echo=F, warning=F, message=FALSE}
+source("theme.R")
+source("functions.R")
+nieuws = readRDS("data/nieuws.rds")
+totaal_rijks = readRDS("data/totaal_rijks.rds")
+getmeta = memoise(nieuws, cache = cache_filesystem("tmp"))
+gethits =memoise(totaal_rijks, cache = cache_filesystem("tmp"))
+```
+
+
+# Rijksuitvoeringsorganisaties in het nieuws
+
+```{r nieuwsverhalen_ruo_nieuws}
+totaal_rijks |>
+  group_by(soort) |>
+  summarize(n=n()) |>
+  mutate(perc=n/sum(n)*100) |>
+  ggplot(aes(x="", y=perc, fill=soort))+
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0)+
+#  facet_wrap(~ publisher) +
+  geom_text(aes(label = paste0(round(perc,0))), 
+            position = position_stack(vjust = 0.5), color="white", size=4)+
+  theme_pie() +   scale_fill_manual(values = svdj_colors) 
+
+
+```
+
+- 38 Rijksuitvoeringsorganisaties
+- Dagbladen, online nieuwssites, Kamervragen, ondertiteling
+- Totaal 127.816 items / artikelen
+
+Methode: 
+- Iteratief proces van automatische en handmatige inhoudsanalyse
+- Kwalitatief en Kwantitatief
+
+
+# Nieuwsverhalen: COA
+
+```{r nieuwsverhalen_coa}
+d2 = readRDS("data/overzicht_coa_d2.rds")
+clusters = readRDS("data/overzicht_coa_clusters.rds")
+tot = readRDS("data/overzicht_tot.rds")
+
+d2 = readRDS("verhalen_coa.rds")
+ggplot(d2, aes(x=week, color=label, y=n)) + 
+  geom_line(data=filter(tot, week %in% d2$week), mapping=aes(x=week, y=n) ,color="grey")+
+  geom_line() +
+  ggrepel::geom_text_repel(data=filter(clusters, cluster %in% d2$cluster), 
+                   mapping=aes(x=peakweek, y=peakn, label=label),  
+                   max.overlaps=60000, min.segment.length=0, nudge_y = 10) + 
+  theme(legend.position = "none")  +
+  geom_line()+ theme_line()+
+  ylab("Aantal artikelen")+
+  xlab("")+
+  scale_color_manual(values = svdj_colors)  + guides(color="none")
+```
+
+# Nieuwsverhalen: Rijkswaterstaat
+
+```{r nieuwsverhalen_rws}
+
+
+d2 = readRDS("data/overzicht_rws_d2.rds")
+clusters = readRDS("data/overzicht_rws_clusters.rds")
+tot = readRDS("data/overzicht_tot.rds")
+
+ggplot(d2, aes(x=week, color=label, y=n)) + 
+  geom_line(data=filter(tot, week %in% d2$week), mapping=aes(x=week, y=n) ,color="grey", lwd=.5)+
+  geom_line(lwd=.75) +
+  theme(legend.position = "none")  +
+  geom_line()+ theme_line()+
+  ggrepel::geom_text_repel(data=filter(clusters, cluster %in% d2$cluster), 
+                   mapping=aes(x=peakweek, y=peakn, label=label),  
+                   max.overlaps=60000, min.segment.length=0, nudge_y = 10) + 
+  ylab("Aantal artikelen")+
+  xlab("")+
+  scale_color_manual(values = svdj_colors)  + guides(color="none") 
+```
+
+- In totaal 79 nieuwsverhalen in 21 Rijksuitvoeringsorganisaties
+- 7.343 artikelen in totaal
+- 3.181 gecodeerde artikelen; 38 nieuwsverhalen
+
+# Gevonden frames
+
+![Gevonden frames](https://i.imgur.com/388zhPM.png)
+
+# Gecodeerde nieuwsverhalen
+
+
+```{r gecodeerde_verhalen}
+framing = read_csv("data/framing.csv")
+alleverhalen=readRDS("data/alleverhalen.rds")
+
+framing |>
+  left_join(alleverhalen)|>
+  group_by(verhaal,soortframe)%>%
+  filter(verhaal != "kadaster")|>
+  summarize(n=sum(aantal))%>%
+  mutate(perc=n/sum(n)*100)|>
+  ggplot(aes(x="", y=perc, fill=soortframe))+
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0)+
+  facet_wrap(~ verhaal) +
+  geom_text(aes(label = round(perc,0)), 
+            position = position_stack(vjust = 0.5), color="white", size=2.5)+
+  theme_pie()+   scale_fill_manual(values = svdj_colors) + theme(strip.text=element_text(size = rel(.75)))
+```
+
+- 38 nieuwsverhalen
+- 20 verschilldende RUOs 
+- (Kadaster wel gecodeerd maar geen frames) 
+
+# Twee soorten organisaties:
+
+**Ondergravend:** dit zijn Rijksuitvoeringsorganisaties waar het meerdendeel van de frames vallen in de categorie ondergravend. Het gaat hier om de Belastingdienst, CBR, COA, DJI,IND, NVWA, RIVM en het UWV
+ 
+**Constructief:** dit zijn Rijksuitvoeringsorganisaties waar de constructieve frames het vaakst voorkomt. Het gaat hier om: ACM, IGJ, ILT,KNMI, KvK, Marechaussee, NFI, Rijkswaterstaat, SVB, Staatsbosbeheer, Politie en OM.
+
+
+
+
+# RUOs & soort media
+
+
+```{r medtype, echo=F, warning=F, message=FALSE}
+
+alleverhalen=readRDS("data/alleverhalen.rds")
+alleverhalen%>%mutate(organisatie=ifelse(verhaal %in% c("belastingdienst", "cbr", "coa", "uwv", 
+                                            "nvwa"  , "ind", "rivm",  "dji"), "Ondergravend", "Constructief"))|>
+  filter(! is.na(organisatie))|>
+  group_by(organisatie,medtype) |>
+  summarize(n=n()) |>
+  mutate(perc=n/sum(n)*100) |>
+  ggplot(aes(x="", y=perc, fill=medtype))+
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0)+ 
+  facet_wrap(~organisatie)+
+  geom_text(aes(label = paste0(round(perc,0),"%")), 
+            position = position_stack(vjust = 0.5), color="white", size=4)+
+  theme(plot.title = element_text(hjust=0.5),
+        axis.line = element_blank(),
+        axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid = element_blank())+
+  theme_pie()+   scale_fill_manual(values = svdj_colors) 
+
+```
+
+**Conclusie 1:** ander mediabeeld, meer dagbladen,meer TV en meer Kamervragen bij ondergravende nieuwsverhalen
+
+
+# Dynamiek tussen media per soort nieuwsverhaal
+
+
+```{r medtype_soort, echo=F, warning=F, message=FALSE}
+
+piekdagen=readRDS("data/piek_per_verhaal.rds")
+verhalen = readRDS("data/alleverhalen.rds")%>%rename(nverhaal=n)
+
+
+verhalen %>%
+  mutate(organisatie=case_when(verhaal %in% c("belastingdienst","cbr", "coa", "uwv", "nvwa", "venj", 
+                                         "rvo", "ind", "rivm", "dji", "arbeidsinspectie") ~"Ondergravend",
+                          verhaal %in% c("acm","igj","ilt","kadaster","kvk","nfi", "knmi","onderwijsinspectie") ~ "Constructief",
+                          verhaal %in% c("rijkswaterstaat","marechaussee","svb","sbb","politie","om")~"Constructief"))|>
+  filter(! is.na(organisatie))|>
+  left_join(piekdagen) |>
+  group_by(organisatie,medtype, dag_from_peak)|>
+  summarize(n=n()) |>
+  mutate(perc=n/sum(n)*100) |>
+  add_zeroes(index_cols=c("organisatie","medtype", "dag_from_peak"))|>
+  mutate(week=round(dag_from_peak/7)) |> 
+  filter(abs(week) <= 4) |>
+  group_by(week, organisatie,medtype) |>
+  summarize(n=sum(n))|>
+  mutate(perc=n/sum(n)*100) |>
+  ggplot(aes(x=week, y=perc,  color=medtype)) + 
+  geom_line()+ theme_line()+
+  ylab("")+
+  xlab("")+
+  scale_x_continuous(breaks=c(-5,-4,-3,-2,-1,0,1,2,3,4,5))+
+  scale_color_manual(values = svdj_colors) +
+  facet_grid(~organisatie)
+
+
+
+```
+
+**Conclusie 2:** Dagbladen jagen ondergravende nieuwsverhalen aan, waarna TV belangrijke rol vult
+
+# Aantal artikelen en lengte van artikelen
+
+```{r, echo=F, warning=F, message=FALSE}
+piekdagen=readRDS("data/piek_per_verhaal.rds")
+
+
+verhalen = readRDS("data/alleverhalen.rds") |>
+  group_by(soortpiek)|>mutate(nverhalen=length(unique(verhaalid)))
+
+meta = readRDS("data/woordenperartikel.rds")
+
+descriptives = meta%>%
+  inner_join(verhalen)|>
+  filter(medtype != "Televisie")|>
+  group_by(verhaalid,soortpiek,date)|>
+  summarise(nwords=mean(nwords),
+            nsentences=mean(nsentences),
+            nverhalen=mean(nverhalen))|>
+  left_join(piekdagen) |>
+  select(dag_from_peak, nwords,nsentences, n,perc,nverhalen) |>
+  add_zeroes(index_cols=c("dag_from_peak", "verhalen", "soortpiek"))|>
+  mutate(week=round(dag_from_peak/7)) |> 
+  filter(abs(week) <= 4) |>
+  group_by(week, soortpiek) |>
+  summarize(nwords=sum(nwords),
+            nsentences=sum(nsentences),
+            n=sum(n),
+            nverhalen=mean(nverhalen))|>
+  mutate(meanwords=nwords/n,
+         meansentences=nsentences/n)|>
+  mutate(gemn=n/nverhalen)
+           
+
+coeff = 10
+
+ggplot(descriptives, aes(x=week))+
+  geom_line(aes(y=gemn), color="#80cdbe")+
+  geom_line(aes(y=meanwords/coeff),color="#e17000")+
+  facet_grid(~soortpiek)+
+  scale_y_continuous(name = "Aantal artikelen",
+    sec.axis = sec_axis(~.*coeff, name="Gemiddeld aantal woorden")
+  )+
+  theme_line_secondary()+
+  xlab("")+
+  scale_x_continuous(breaks=c(-5,-4,-3,-2,-1,0,1,2,3,4,5))
+```
+
+**Conclusie 3:** Veel lange artikelen aan het begin van een ondergravend nieuwsverhaal, waarna alle media erop springen maar artikelen korter zijn en daarna neemt lengte toe ivm nabeschouwingen
+
+# Bronnen in het nieuws
+
+```{r bron_soort, echo=F, warning=F, message=FALSE}
+bronnen_per_verhaal = readRDS("data/bronnen_per_verhaal2.rds")
+
+
+bronnen_per_verhaal %>%
+   mutate(soortpiek=case_when(verhaal %in% c("belastingdienst", "cbr","coa","uwv","nvwa","venj","rvo","ind","rivm","dji","arbeidsinspectie") ~"Ondergravend",
+                          verhaal %in% c("acm","igj","ilt","kadaster","kvk","nfi", "knmi","onderwijsinspectie") ~ "Constructief",
+                          verhaal %in% c("rijkswaterstaat","marechaussee","svb","sbb","politie","om")~"Constructief"))|>
+  filter(! is.na(group), medtype !="Televisie")|> 
+  group_by(soortpiek, group) |>
+  summarize(source=sum(source),other=sum(other)) |>
+  mutate(perc = round(source/sum(source)*100,1), gezag =source/(source+other)*100) |>
+  ggplot(aes(x="", y=perc, fill=group))+
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0)+
+  facet_wrap(~soortpiek)+
+  geom_text(aes(label = round(perc,0)), 
+            position = position_stack(vjust = 0.5), color="white", size=3)+
+  theme_pie()  + scale_fill_manual(values = svdj_colors) 
+```
+
+**Conclusie 4**: Ander brongebruik per soort nieuwsverhaal.
+Ondergravende nieuwsverhalen citeren veel meer politieke actoren, terwijl RUOs en Experts vaker woren geciteerd bij constructieve nieuwsverhalen. 
+
+# Bronnen per mediumtype
+
+```{r bron_medtype, echo=F, warning=F, message=FALSE}
+bronnen_per_verhaal = readRDS("data/bronnen_per_verhaal2.rds")
+
+
+bronnen_per_verhaal %>%
+   mutate(soortpiek=case_when(verhaal %in% c("belastingdienst", "cbr","coa","uwv","nvwa","venj","rvo","ind","rivm","dji","arbeidsinspectie") ~"Ondergravend",
+                          verhaal %in% c("acm","igj","ilt","kadaster","kvk","nfi", "knmi","onderwijsinspectie") ~ "Constructief",
+                          verhaal %in% c("rijkswaterstaat","marechaussee","svb","sbb","politie","om")~"Constructief"))|>
+  filter(! is.na(group), medtype !="Televisie")|> 
+  group_by(medtype, group) |>
+  summarize(source=sum(source),other=sum(other)) |>
+  mutate(perc = round(source/sum(source)*100,1), gezag =source/(source+other)*100) |>
+  ggplot(aes(x="", y=perc, fill=group))+
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0)+
+  facet_wrap(~medtype)+
+  geom_text(aes(label = round(perc,0)), 
+            position = position_stack(vjust = 0.5), color="white", size=3)+
+  theme_pie()  + scale_fill_manual(values = svdj_colors) 
+```
+
+**Conclusie 5:** RUOs vaker als bron in Online nieuws dan in dagbladen. Politiek vaker bron in dagbladen dan bij online sites. Ministerie even vaak. Experts vaker bij dagbladen als bron, andere media vaker bron bij online nieuwssites.
+
+
+
+
+# Dynamiek van bronnen in nieuwsverhalen
+
+
+```{r bron_dynamiek, echo=F, warning=F, message=FALSE}
+
+piekdagen=readRDS("data/piek_per_verhaal.rds")
+
+bronnen = readRDS("data/bronnen_per_verhaal2.rds")
+
+bronnen |> filter(! is.na(group), medtype !="Televisie")|> 
+  mutate(soortpiek=case_when(verhaal %in% c("belastingdienst", "cbr", "coa", "uwv", "nvwa", "venj", 
+                                            "rvo", "ind", "rivm", "dji", "arbeidsinspectie") ~"Ondergravend",
+                          verhaal %in% c("acm","igj","ilt","kadaster","kvk","nfi", "knmi","onderwijsinspectie") ~ "Constructief",
+                          verhaal %in% c("rijkswaterstaat","marechaussee","svb","sbb","politie","om")~"Constructief"))|>
+  group_by(soortpiek,date,id, group)%>%
+  summarize(nbron=sum(source), .groups="drop")%>%
+  group_by(soortpiek, date, group) |>
+  summarize(nb=sum(nbron), .groups="drop") |> 
+  left_join(piekdagen) |>
+  filter(!is.na(dag_from_peak))|>
+  select(soortpiek,dag_from_peak, nb, group) |>
+  add_zeroes(index_cols=c("soortpiek", "dag_from_peak", "group"))|>
+  mutate(week=round(dag_from_peak/7)) |> 
+  filter(abs(week) <= 4) |>
+  group_by(soortpiek,week, group) |>
+  summarize(nb=sum(nb)) |> 
+  mutate(perc=nb/sum(nb)*100)|>
+  ggplot(aes(x=week, y=perc, color=group)) + 
+  geom_line()+
+  facet_grid(~soortpiek)+
+  ylab("Percentage")+
+  xlab("")+
+  theme_line_secondary() +scale_color_manual(values = svdj_colors)  +
+  scale_x_continuous(breaks=c(-5,-4,-3,-2,-1,0,1,2,3,4,5))
+```
+
+**Conclusie 6:** Andere dynamiek van de bronnen.
+Bij ondergravende nieuwsverhalen hebben RUOs in het begin nog enige zeggenschap maar neemt politiek het al snel over. Bij constructieve nieuwsverhalen zijn alleen tijdens de piek politieke bronnen dominant
+
+
+# Frames in het nieuws
+
+```{r frametype_soort}
+framing = read_csv("data/framing.csv")%>%rename(verhaalid=verhalen)|>
+  left_join(nieuws)
+
+framing2 = framing |>
+    mutate(soortpiek=case_when(verhaal %in% c("belastingdienst", "cbr", "coa", "uwv", "nvwa", "venj", 
+                                            "rvo", "ind", "rivm", "dji", "arbeidsinspectie") ~"Ondergravend",
+                          verhaal %in% c("acm","igj","ilt","kadaster","kvk","nfi", "knmi","onderwijsinspectie") ~ "Constructief",
+                          verhaal %in% c("rijkswaterstaat","marechaussee","svb","sbb","politie","om")~"Constructief"))|>
+  mutate(frametoon=case_when(soortframe=="Ondergravend" ~ -1,
+                             soortframe=="Constructief" ~ 1,
+                              T~0)) |>
+  group_by(soortpiek,verhaalid,date, id) |>
+  summarize(nframes=sum(aantal), frametoon=sum(frametoon * aantal))|>
+  mutate(ifframe=case_when(nframes==0 ~ "Ongeframed",
+                         frametoon==0 ~ "Neutraal/gemengd",
+                         frametoon <0 ~ "Ondergravend",
+                         frametoon>0  ~ "Constructief")) |>
+  group_by(soortpiek, ifframe)%>%
+  summarize(n=n())%>%
+  mutate(perc=n/sum(n)*100)
+
+ggplot(framing2, aes(x="", y=perc, fill=ifframe))+
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0)+
+  facet_wrap(~soortpiek)+
+  geom_text(aes(label = round(perc,0)), 
+            position = position_stack(vjust = 0.5), color="white", size=3)+
+  theme_pie() + scale_fill_manual(values = svdj_colors) 
+```
+
+**Conclusie 7:** Iets meer ongeframede en neutraal geframede berichtgeving bij ondergravende nieuwsverhalen.
+
+#  Frames & Type media
+
+```{r frames_medtype}
+framing = read_csv("data/framing.csv")%>%rename(verhaalid=verhalen)
+nieuws=readRDS("data/nieuws.rds")
+alleverhalen = readRDS("data/alleverhalen.rds")
+piekdagen=readRDS("data/piek_per_verhaal.rds")
+
+framing |>
+  left_join(alleverhalen)|>
+  filter(id %in% alleverhalen$id)|>
+  mutate(frametoon=case_when(soortframe=="Ondergravend" ~ -1,
+                             soortframe=="Constructief" ~ 1,
+                              T~0)) |>
+  group_by(medtype,id) |>
+  summarize(nframes=sum(aantal), frametoon=sum(frametoon * aantal))|>
+  mutate(ifframe=case_when(nframes==0 ~ "Ongeframed",
+                         frametoon==0 ~ "Neutraal/gemengd",
+                         frametoon <0 ~ "Ondergravend",
+                         frametoon>0  ~ "Constructief")) |>
+  group_by(medtype, ifframe)|>
+  summarize(nf=n()) |>
+  mutate(perc=nf/sum(nf)*100)|>
+  ggplot( aes(x="", y=perc, fill=ifframe))+
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0)+
+  facet_grid(~ medtype)+
+  geom_text(aes(label = round(perc,0)), 
+            position = position_stack(vjust = 0.5), color="white", size=3)+
+  theme_pie() + scale_fill_manual(values = svdj_colors) 
+```
+
+**Conclusie 8:** Ander patroon soorten frames per type media. Minst ondergravend en meest constructief in Online media. Meest ondergravend en minst constructief in de Kamervragen. Meest neutrale berichtgeving in dagbladen. Meest ongeframede berichtgeving in dagbladen en online media.  
+
+
+# Dynamiek van de frames in Nieuwsverhalen
+
+```{r frame_dynamiek}
+
+framing = read_csv("data/framing.csv")%>%rename(verhaalid=verhalen)|>
+  left_join(nieuws)
+piekdagen=readRDS("data/piek_per_verhaal.rds")
+
+
+framing |>
+    mutate(soortpiek=case_when(verhaal %in% c("belastingdienst", "cbr", "coa", "uwv", "nvwa", "venj", 
+                                            "rvo", "ind", "rivm", "dji", "arbeidsinspectie") ~"Ondergravend",
+                          verhaal %in% c("acm","igj","ilt","kadaster","kvk","nfi", "knmi","onderwijsinspectie") ~ "Constructief",
+                          verhaal %in% c("rijkswaterstaat","marechaussee","svb","sbb","politie","om")~"Constructief"))|>
+  mutate(frametoon=case_when(soortframe=="Ondergravend" ~ -1,
+                             soortframe=="Constructief" ~ 1,
+                              T~0)) |>
+  group_by(soortpiek,verhaalid,date, id) |>
+  summarize(nframes=sum(aantal), frametoon=sum(frametoon * aantal))|>
+  mutate(ifframe=case_when(nframes==0 ~ "Ongeframed",
+                         frametoon==0 ~ "Neutraal/gemengd",
+                         frametoon <0 ~ "Ondergravend",
+                         frametoon>0  ~ "Constructief")) |>
+  group_by(soortpiek, verhaalid, date, ifframe) |>
+  summarize(nf=n(), .groups="drop") |> 
+  left_join(piekdagen) |>
+  filter(!is.na(dag_from_peak))|>
+  select(soortpiek, dag_from_peak, nf, ifframe) |>
+  mutate(dag_from_peak = as.integer(dag_from_peak)) |>
+  add_zeroes(index_cols=c("soortpiek", "dag_from_peak", "ifframe"))|>
+  mutate(week=round(dag_from_peak/7)) |> 
+  filter(abs(week) <= 4) |>
+  group_by(soortpiek,week, ifframe) |>
+  summarize(nf=sum(nf))|>
+  mutate(perc=nf/sum(nf)*100)|>
+  ggplot(aes(x=week, y=perc,  color=ifframe)) + geom_line()+
+  facet_grid(~soortpiek)+
+   ylab("Percentage")+
+  xlab("")+
+  theme_line() +scale_color_manual(values = svdj_colors)  +
+  scale_x_continuous(breaks=c(-5,-4,-3,-2,-1,0,1,2,3,4,5))
+
+```
+
+**Conclusie 9:** Andere dynamiek in de frames
+Bij ondergravende nieuwsverhalen in het begin nog ongeframede berichten, maar dat neemt snel af tot na de piek. Daarna ook meer ruimte voor constructieve frames.

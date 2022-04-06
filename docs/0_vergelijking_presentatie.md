@@ -5,16 +5,22 @@ title: Nieuwsverhalen vergelijking
 
 # Rijksuitvoeringsorganisaties in het nieuws
 
-- 38 Rijksuitvoeringsorganisaties
-- Dagbladen, online nieuwssites, Kamervragen, ondertiteling
-- Totaal 127.816 items / artikelen
+![](0_vergelijking_presentatie_files/figure-gfm/nieuwsverhalen_ruo_nieuws-1.png)<!-- -->
+
+-   38 Rijksuitvoeringsorganisaties
+-   Dagbladen, online nieuwssites, Kamervragen, ondertiteling
+-   Totaal 127.816 items / artikelen
 
 Methode: - Iteratief proces van automatische en handmatige
 inhoudsanalyse - Kwalitatief en Kwantitatief
 
-# Nieuwsverhalen
+# Nieuwsverhalen: COA
 
-# Nieuwsverhalen
+![](0_vergelijking_presentatie_files/figure-gfm/nieuwsverhalen_coa-1.png)<!-- -->
+
+# Nieuwsverhalen: Rijkswaterstaat
+
+![](0_vergelijking_presentatie_files/figure-gfm/nieuwsverhalen_rws-1.png)<!-- -->
 
 - In totaal 79 nieuwsverhalen in 21 Rijksuitvoeringsorganisaties
 - 7.343 artikelen in totaal
@@ -26,9 +32,11 @@ inhoudsanalyse - Kwalitatief en Kwantitatief
 
 # Gecodeerde nieuwsverhalen
 
-- 38 nieuwsverhalen
-- 20 verschilldende RUOs
-- (Kadaster wel gecodeerd maar geen frames)
+![](0_vergelijking_presentatie_files/figure-gfm/gecodeerde_verhalen-1.png)<!-- -->
+
+-   38 nieuwsverhalen
+-   20 verschilldende RUOs
+-   (Kadaster wel gecodeerd maar geen frames)
 
 # Twee soorten organisaties:
 
@@ -48,7 +56,7 @@ Politie en OM.
 **Conclusie 1:** ander mediabeeld, meer dagbladen,meer TV en meer
 Kamervragen bij ondergravende nieuwsverhalen
 
-# Dyanmiek tussen media per soort nieuwsverhaal
+# Dynamiek tussen media per soort nieuwsverhaal
 
 ![](0_vergelijking_presentatie_files/figure-gfm/medtype_soort-1.png)<!-- -->
 
@@ -92,24 +100,16 @@ tijdens de piek politieke bronnen dominant
 
 # Frames in het nieuws
 
-![](0_vergelijking_presentatie_files/figure-gfm/frames_soort-1.png)<!-- -->
-
-**Conclusie 7:** Meer variatie in de frames bij ondergravende
-nieuwsverhalen (er zijn ook meer ondergravende frames dus dat is niet
-gek!).
-
-# Frames in het nieuws
-
 ![](0_vergelijking_presentatie_files/figure-gfm/frametype_soort-1.png)<!-- -->
 
-**Conclusie 8:** Iets meer ongeframede en neutraal geframede
-berichtgeving bi ondergravende nieuwsverhalen.
+**Conclusie 7:** Iets meer ongeframede en neutraal geframede
+berichtgeving bij ondergravende nieuwsverhalen.
 
 # Frames & Type media
 
 ![](0_vergelijking_presentatie_files/figure-gfm/frames_medtype-1.png)<!-- -->
 
-**Conclusie 9:** Ander patroon soorten frames per type media. Minst
+**Conclusie 8:** Ander patroon soorten frames per type media. Minst
 ondergravend en meest constructief in Online media. Meest ondergravend
 en minst constructief in de Kamervragen. Meest neutrale berichtgeving in
 dagbladen. Meest ongeframede berichtgeving in dagbladen en online media.
@@ -118,7 +118,7 @@ dagbladen. Meest ongeframede berichtgeving in dagbladen en online media.
 
 ![](0_vergelijking_presentatie_files/figure-gfm/frame_dynamiek-1.png)<!-- -->
 
-**Conclusie 10:** Andere dynamiek in de frames Bij ondergravende
+**Conclusie 9:** Andere dynamiek in de frames Bij ondergravende
 nieuwsverhalen in het begin nog ongeframede berichten, maar dat neemt
 snel af tot na de piek. Daarna ook meer ruimte voor constructieve
 frames.
