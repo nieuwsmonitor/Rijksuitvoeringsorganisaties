@@ -70,27 +70,28 @@
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
-    document.addEventListener('keydown', function(e) {
-    if(e.key === 'PageUp' || e.key === 'PageDown') {
-	let prev = null;
-	for (let item of document.getElementsByTagName("h1")) {
-	    if (e.key == 'PageDown' && item.getBoundingClientRect().top > 50) {
-		e.preventDefault();
-		console.log({item, y:item.getBoundingClientRect().top});
-		item.scrollIntoView(true);
-		return;
-	    }
-	    if (e.key == 'PageUp') {
-				console.log({item, prev, y:item.getBoundingClientRect().top});
-	    }
-	    if (e.key == 'PageUp' && item.getBoundingClientRect().top >= -10) {
-		e.preventDefault();
-		prev.scrollIntoView(true);
-		return;
-	    }
-	    prev = item;
-	};
-    }
-});
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "PageUp" || e.key === "PageDown") {
+          let prev = null;
+          for (let item of document.getElementsByTagName("h1")) {
+            if (e.key == "PageDown" && item.getBoundingClientRect().top > 50) {
+              e.preventDefault();
+              console.log({ item, y: item.getBoundingClientRect().top });
+              item.scrollIntoView(true);
+              return;
+            }
+            if (e.key == "PageUp") {
+              console.log({ item, prev, y: item.getBoundingClientRect().top });
+            }
+            if (e.key == "PageUp" && item.getBoundingClientRect().top >= -10) {
+              e.preventDefault();
+              prev.scrollIntoView(true);
+              return;
+            }
+            prev = item;
+          }
+        }
+      });
+    </script>
   </body>
 </html>
