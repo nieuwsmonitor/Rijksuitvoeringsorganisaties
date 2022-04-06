@@ -1,16 +1,17 @@
 Nieuwsverhaal COA
 ================
-Analyses inhoud van het nieuws
 April 2022
 
 
 
-# 1. Dynamiek nieuwsverhalen
+# 1. Inleiding
 
-In deze eerste analyse laten we zien in hoeverre het nieuwsverhaal rond
-het COA eind 2021 in het nieuws is geweest. Het gaat hierbij om de
-opvang van asielzoekers uit Afghanistan die na de inname van het land
-door de Taliban zijn gevlucht.
+In deze analyse laten we zien in hoeverre het nieuwsverhaal rond het COA
+eind 2021 in het nieuws is geweest. Het gaat hierbij om de opvang van
+asielzoekers uit Afghanistan die na de inname van het land door de
+Taliban zijn gevlucht.
+
+# 2. Dynamiek nieuwsverhalen
 
 In onderstaande figuur gewen we weer in hoeverre de berichtgeving is
 verlopen. We zien rond de 0 op de x-as de dag waarop het meeste nieuws
@@ -18,7 +19,7 @@ is verschenen over dit nieuwsverhaal.
 
 ![](0_nieuwsverhalen_coa_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
-# 2. Aantallen berichten per mediumtype
+# 3. Aantallen berichten per mediumtype
 
 In onderstaande figuur zien we de aandacht voor het nieuwsverhaal in de
 verschillende mediagroepen.
@@ -30,7 +31,7 @@ door de online nieuwssites (36%). De Televisieprogramma’s nemen een
 aanzienlijk deel van de berichtgeving voor hun rekening (17%) terwijl de
 Kamervragen 4% van de berichtgeving vertegenwoordigen.
 
-# 3. Aandacht per mediumtype per week
+# 4. Aandacht per mediumtype per week
 
 In onderstaande figuur geven we weer hoe de verichtgeving verloopt per
 week. In het midden (bij de 0 op de x-as) is de week waarin de meeste
@@ -47,12 +48,13 @@ gesproken. Ook valt het op dat er steeds Kamervragen worden gesteld in
 de eerste weken tot aan de piek. Daarna neemt het nieuws direct snel af
 en is er nog een kleine opleving na een paar weken.
 
-# 4. Aantal artikelen en lengte van artikelen per week rond piek
+# 5. Aantal artikelen en lengte van artikelen per week rond piek
 
 In onderstaande figuur geven we twee lijnen weer. Allereerst de mint
-groene lijnen die het aantal artikelen weergeeft per week. De @ lijn
-geeft het gemiddelde aantal woorden weer dat een artikel in die week
-bevatte. Hierbij hebben we de televisie-uitzendingen achterwege gelaten.
+groene lijnen die het aantal artikelen weergeeft per week. De ornaje
+lijn geeft het gemiddelde aantal woorden weer dat een artikel in die
+week bevatte. Hierbij hebben we de televisie-uitzendingen achterwege
+gelaten.
 
 ![](0_nieuwsverhalen_coa_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
@@ -62,10 +64,11 @@ beneden. Na de piek in de aandacht zie je het omgekeerde gebeuren. Er
 worden minder artikelen geschreven, maar de gemiddelde lengte van de
 artikelen neemt aanzienlijk toe.
 
-# 5. Wordcloud
+# 6. Wordcloud
 
 In onderstaande figuur geven we een wordcloud weer van de woorden die
 het meest voorkomen in het nieuws over dit nieuwsverhaal.
+
 ![](0_nieuwsverhalen_coa_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
 We zien dat het COA hier veruit het grootste is. Daarnaast gaat het
@@ -74,7 +77,7 @@ vraag of er genoeg opvangplekken zijn. Worden statushouders genoemd en
 ook gaat het over concrete plaatsten zoals Harskamp en Ter Apel, waar
 vluchtelingen worden opgevangen.
 
-# 6. Bronnen in het nieuws
+# 7. Bronnen in het nieuws
 
 In deze analyse gaan we in op de bronnen van het nieuws en kijken in
 hoeverre deze voorkomen in het nieuws. We hebben hiervoor de computer
@@ -95,7 +98,7 @@ de media veel ruimte voor de politiek als bron van het nieuws en het
 ministerie. Ook komen burgemeesters en wethouders aan het woord, vooral
 wanneer het gaat om de mogelijke opvang in een specifieke gemeente.
 
-# 6a. Bronnen in het nieuws per type media
+# 8. Bronnen in het nieuws per type media
 
 In onderstaande figuur geven we weer in hoeverre de verschillende
 bronnen naar voren kwamen in het nieuws van de dagbladen, de online
@@ -110,7 +113,7 @@ van het nieuws in de online nieuwsberichten. De dagbladen hadden meer
 oog voor de politici als bron van het nieuws. Dit gold ook voor de
 verschilldende burgemeesters en wethouders.
 
-# 6b. Bronnen in het nieuws over tijd
+# 9. Bronnen in het nieuws over tijd
 
 In onderstaande figuur geven we weer in hoeverre de verschillende
 bronnen voorkomen in het nieuwsverhaal rond het COA in aanloop naar de
@@ -127,7 +130,7 @@ is dat aan het woord komt in het nieuws. De weken erna verdwijnen de
 politici en het ministerie op de achtergrond en wordt het COA weer vaker
 aan het woord gelaten.
 
-# 7. Frames
+# 10. Frames
 
 Het verhaal rond het COA is vooral ondergravend; een meerderheid van de
 frames valt in die categorie, zoals ook blijkt uit onderstaande figuur.
@@ -150,7 +153,7 @@ veelal genoemd. In dit verhaal komt dit frame ook met regelmaat terug.
 Juist de bezuiningen van de afgelopen jaren hebben de situatie
 veroorzaakt.
 
-# 7a. Frames in de verschillende type media
+# 11. Frames in de verschillende type media
 
 In onderstaande figuur geven we het gebruik van de frames weer in de
 verschillende soorten media.
@@ -166,7 +169,24 @@ optreden. In de overige media is dit frame niet of nauwelijks terug te
 vinden. Het frame waarbij het gaat om de ‘grenzen en de moetjes’ van de
 wet komen in alle media terug. Het vaakst op televisie.
 
-# 7b. Frames over tijd
+# 12. Soorten frames in de verschillende type media
+
+In onderstaande figuur geven we het gebruik van de frames weer in de
+verschillende soorten media. Hierbij hebben we ook gekeken naar de
+berichten waarin niet wordt geframed, oftewel de feitelijke
+berichtgeving.
+
+![](0_nieuwsverhalen_coa_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+
+In de online berichtgeving komen relatief de meeste ongeframede
+berichten terug. In een kwart van de artikelen wordt geen frame
+gebruikt. In de dagbladen ligt dit percentage een stuk lager (7%). Ook
+de neutraal geframede berichten zijn vaker te vinden in de online
+berichtgeving (10%) dan in de dagbladen (8%). Dit geldt ook voor de
+constructief geframede berichten. Deze zijn respectievelijk in 8% en 2%
+van de artikelen te vinden online en in de dagbladen.
+
+# 13. Frames over tijd
 
 In onderstaande figuur geven we weer in hoeverre er constructieve en
 ondergravende frames voorkwamen in het nieuws en in hoeverre het nieuws
@@ -176,7 +196,7 @@ die berichten waarin geen frame te vinden was. Dit zijn berichten waarin
 vooral feiten worden weergegeven die verder niet in een bepaalde context
 worden geplaatst.
 
-![](0_nieuwsverhalen_coa_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+![](0_nieuwsverhalen_coa_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
 
 We zien dat in het begin van het nieuwsverhaal, de eerste dagen, nog
 nieuws te vinden was waarin geen frames werden gebruikt. In het begin
