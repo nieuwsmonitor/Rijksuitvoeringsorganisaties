@@ -1,15 +1,13 @@
-Nieuwsverhalen vergelijking
-================
-Analyses inhoud van het nieuws
-April 2022
-
-
+---
+layout: presentatie
+title: Nieuwsverhalen vergelijking
+---
 
 # Rijksuitvoeringsorganisaties in het nieuws
 
--   38 Rijksuitvoeringsorganisaties
--   Dagbladen, online nieuwssites, Kamervragen, ondertiteling
--   Totaal 127.816 items / artikelen
+- 38 Rijksuitvoeringsorganisaties
+- Dagbladen, online nieuwssites, Kamervragen, ondertiteling
+- Totaal 127.816 items / artikelen
 
 Methode: - Iteratief proces van automatische en handmatige
 inhoudsanalyse - Kwalitatief en Kwantitatief
@@ -18,9 +16,9 @@ inhoudsanalyse - Kwalitatief en Kwantitatief
 
 # Nieuwsverhalen
 
--   In totaal 79 nieuwsverhalen in 21 Rijksuitvoeringsorganisaties
--   7.343 artikelen in totaal
--   3.181 gecodeerde artikelen; 38 nieuwsverhalen
+- In totaal 79 nieuwsverhalen in 21 Rijksuitvoeringsorganisaties
+- 7.343 artikelen in totaal
+- 3.181 gecodeerde artikelen; 38 nieuwsverhalen
 
 # Gevonden frames
 
@@ -28,9 +26,9 @@ inhoudsanalyse - Kwalitatief en Kwantitatief
 
 # Gecodeerde nieuwsverhalen
 
--   38 nieuwsverhalen
--   20 verschilldende RUOs
--   (Kadaster wel gecodeerd maar geen frames)
+- 38 nieuwsverhalen
+- 20 verschilldende RUOs
+- (Kadaster wel gecodeerd maar geen frames)
 
 # Twee soorten organisaties:
 

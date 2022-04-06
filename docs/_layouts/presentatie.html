@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+  <head>
+    <title>Rijksuitvoeringsorganisaties</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <link rel="stylesheet" href="assets/css/main.css" />
+  </head>
+  <body class="is-preload">
+    <!-- Wrapper -->
+    <div id="wrapper">
+      <!-- Main -->
+      <div id="main">
+        <div class="inner">
+          <!-- Header -->
+          <header id="header">
+            <a href="index.html" class="logo"
+              ><strong>Rijksuitvoeringsorganisaties</strong> - Mediabeeld</a
+            >
+          </header>
+
+          <section>{{ content }}</section>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div id="sidebar">
+        <div class="inner">
+          <!-- Menu -->
+          <nav id="menu">
+            <header class="major">
+              <h2>Menu</h2>
+            </header>
+            <ul>
+              <li><a href="index.html">Introductie</a></li>
+              <li><a href="0_nieuwsverhalen_coa.html">COA</a></li>
+              <li>
+                <a href="0_nieuwsverhalen_rijkswaterstaat.html"
+                  >Rijkswaterstaat</a
+                >
+              </li>
+            </ul>
+          </nav>
+
+          <!-- Footer -->
+          <footer id="footer">
+            <p class="copyright">
+              &copy; LJS Nieuwsmonitor. All rights reserved. Theme:
+              <a href="https://html5up.net/uploads/demos/editorial/index.html"
+                >Editorial by HTML5 UP</a
+              >
+            </p>
+          </footer>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+    document.addEventListener('keydown', function(e) {
+    if(e.key === 'PageUp' || e.key === 'PageDown') {
+	let prev = null;
+	for (let item of document.getElementsByTagName("h1")) {
+	    if (e.key == 'PageDown' && item.getBoundingClientRect().top > 50) {
+		e.preventDefault();
+		console.log({item, y:item.getBoundingClientRect().top});
+		item.scrollIntoView(true);
+		return;
+	    }
+	    if (e.key == 'PageUp') {
+				console.log({item, prev, y:item.getBoundingClientRect().top});
+	    }
+	    if (e.key == 'PageUp' && item.getBoundingClientRect().top >= -10) {
+		e.preventDefault();
+		prev.scrollIntoView(true);
+		return;
+	    }
+	    prev = item;
+	};
+    }
+});
+  </body>
+</html>
